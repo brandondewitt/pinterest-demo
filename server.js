@@ -12,8 +12,8 @@ app.use('/api', function (req, res) {
   proxy.web(req, res);
 });
 app.use(express.static(__dirname));
-app.get('*', (req, res) => res.sendFile('index.html'));
 app.use(require('serve-static')(path.join(__dirname, 'static')));
+app.get('*', (req, res) => res.sendFile('index.html', { root: __dirname }));
 
 var port = process.env.PORT || 3000;
 
