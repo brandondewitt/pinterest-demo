@@ -38,7 +38,7 @@ app.put('/pins/:id', (req, res) => {
       if (err) {
         return res.status(500).json({ success: false, data: err});
       }
-      res.status(204).json(pin);
+      res.json(pin);
     });
   });
 });
