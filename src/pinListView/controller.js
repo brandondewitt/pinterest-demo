@@ -6,6 +6,5 @@ export default class PinListViewCtrl {
       $ngRedux.connect(pinSelector, PinActions)(this)
     ];
     $scope.$on('$destroy', () => unsubscribes.forEach(unsubscribe => unsubscribe()));
-    console.log('PinListViewCtrl', this)
   }
 }

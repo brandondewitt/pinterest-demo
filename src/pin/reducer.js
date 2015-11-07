@@ -14,7 +14,7 @@ export const initialState = {
 export default function pins(state = initialState, action) { //jshint ignore:line
   switch (action.type) {
     case RESET_PIN:
-      return Object.assign({}, state, { listItem: initialState.listItem });
+      return Object.assign({}, state, { listItem: {} });
     case FETCH:
       return Object.assign({}, state, { loading: true });
     case RECEIVE_ALL:

@@ -10,6 +10,7 @@ export default function PinActions($state, PinResource) {
       type: RESET_PIN
     };
   }
+  
   function receiveAll(pins) {
     return {
       type: RECEIVE_ALL,
