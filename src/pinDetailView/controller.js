@@ -15,4 +15,10 @@ export default class PinDetailViewCtrl {
       .then(() => this.success('Pin updated.'))
       .catch(response => this.error(response.data))
   }
+
+  destroyPin(id) {
+    this.destroy(id)
+      .then(() => this.success('Pin removed.'))
+      .catch(response => this.error(response.data))
+  }
 }
