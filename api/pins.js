@@ -80,19 +80,28 @@ app.get('/pins/:id', (req, res) => {
 });
 
 app.get('/pins', (req, res) => {
+  let search = req.query.search;
+  let query = 'SELECT id, image, description FROM pins';
+  let filter = [];
+
   pg.connect(connectionString, (err, client, done) => {
     if (err) {
       done();
       return res.status(500).json({ success: false, data: err});
     }
 
-    let query = client.query('SELECT id, image, description FROM pins', (err, result) => {
+    if (search) {
+      query += ' WHERE description like $1';
+      filter.push(`%${search}%`);
+    }
+
+    client.query(...[query, filter, (err, result) => {
       done();
       if (err) {
         return res.status(500).json({ success: false, data: err});
       }
       res.json(result.rows);
-    });
+    }]);
   });
 });
 

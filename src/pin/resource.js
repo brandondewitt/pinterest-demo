@@ -5,8 +5,8 @@ export default class PinResource {
     this.endpoint = '/api/pins';
   }
 
-  find() {
-    return this.$http.get(this.endpoint).then(res => res.data);
+  find(params, timeout) {
+    return this.$http.get(this.endpoint, { params, timeout }).then(res => res.data);
   }
 
   findById(id) {

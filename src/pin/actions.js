@@ -2,15 +2,16 @@ export const FETCH = 'PINS_FETCH';
 export const RECEIVE_ALL = 'PINS_RECEIVE_ALL';
 export const RECEIVE_ONE = 'PINS_RECEIVE_ONE';
 export const RESET_PIN = 'PINS_RESET_ONE';
+export const RECEIVE_PROMISE = 'PINS_RECEIVE_PROMISE';
 
-const $inject = ['$state', 'PinResource'];
-export default function PinActions($state, PinResource) {
+const $inject = ['$state', '$q', 'PinResource'];
+export default function PinActions($state, $q, PinResource) {
   function resetPin() {
     return {
       type: RESET_PIN
     };
   }
-  
+
   function receiveAll(pins) {
     return {
       type: RECEIVE_ALL,
@@ -25,11 +26,16 @@ export default function PinActions($state, PinResource) {
     };
   }
 
-  function find() {
+  function find(params) {
+    let deferred = $q.defer();
     return dispatch => {
       dispatch({ type: FETCH });
+      dispatch({
+        type: RECEIVE_PROMISE,
+        promise: deferred
+      });
       PinResource
-        .find()
+        .find(params, deferred.promise)
         .then(response => dispatch(receiveAll(response)))
         .catch(response => console.warn(response));
     };
