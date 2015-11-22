@@ -6,5 +6,9 @@ export default function pinSearchInputCtrl($scope, $ngRedux, PinActions) {
     $ngRedux.connect(pinSelector, PinActions)(this)
   ];
   $scope.$on('$destroy', () => unsubscribes.forEach(unsubscribe => unsubscribe()));
+  this.search = (params) => {
+    this.find(params)
+      .catch(response => this.error(response.data));
+  }
 }
 pinSearchInputCtrl.$inject = $inject;

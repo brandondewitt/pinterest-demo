@@ -34,49 +34,45 @@ export default function PinActions($state, $q, PinResource) {
         type: RECEIVE_PROMISE,
         promise: deferred
       });
-      PinResource
+      return PinResource
         .find(params, deferred.promise)
-        .then(response => dispatch(receiveAll(response)))
-        .catch(response => console.warn(response));
+        .then(response => dispatch(receiveAll(response)));
     };
   }
 
   function findById(id) {
+    console.log('findById', id)
     return dispatch => {
       dispatch({ type: FETCH });
-      PinResource
+      return PinResource
         .findById(id)
-        .then(response => dispatch(receiveOne(response)))
-        .catch(response => console.warn(response));
+        .then(response => dispatch(receiveOne(response)));
     };
   }
 
   function create(pin) {
     return dispatch => {
       dispatch({ type: FETCH });
-      PinResource
+      return PinResource
         .create(pin)
-        .then(() => $state.go('pin.list'))
-        .catch(response => console.warn(response));
+        .then(() => $state.go('pin.list'));
     };
   }
 
   function update(pin) {
     return dispatch => {
       dispatch({ type: FETCH });
-      PinResource
+      return PinResource
         .update(pin)
-        .then(() => $state.go('pin.list'))
-        .catch(response => console.warn(response));
+        .then(() => $state.go('pin.list'));
     };
   }
 
   function destroy(id) {
     return dispatch => {
-      PinResource
+      return PinResource
         .destroy(id)
-        .then(() => $state.go('pin.list'))
-        .catch(response => console.warn(response));
+        .then(() => $state.go('pin.list'));
     };
   }
 

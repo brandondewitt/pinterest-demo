@@ -8,8 +8,9 @@ export default function AppDirective() {
             <pin-search-input flex style='margin-left: 10px'></pin-search-input>
           </div>
         </md-toolbar>
-        <md-content layout-margin layout-padding>
+        <md-content id='main' layout-margin layout-padding>
           <ui-view></ui-view>
+          <notify></notify>
         </md-content>
       </div>
     `

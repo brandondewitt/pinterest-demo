@@ -1,12 +1,16 @@
-export const find = ($ngRedux, PinActions) => {
-  $ngRedux.dispatch(PinActions.find());
+export const find = ($ngRedux, PinActions, NotifyActions) => {
+  return $ngRedux
+    .dispatch(PinActions.find())
+    .catch(response => $ngRedux.dispatch(NotifyActions.error(response.data)));
 };
-find.$inject = ['$ngRedux', 'PinActions'];
+find.$inject = ['$ngRedux', 'PinActions', 'NotifyActions'];
 
-export const findById = ($ngRedux, PinActions, $stateParams) => {
-  $ngRedux.dispatch(PinActions.findById($stateParams.id));
+export const findById = ($ngRedux, $stateParams, PinActions, NotifyActions) => {
+  $ngRedux
+    .dispatch(PinActions.findById($stateParams.id))
+    .catch(response => $ngRedux.dispatch(NotifyActions.error(response.data)));
 };
-findById.$inject = ['$ngRedux', 'PinActions', '$stateParams'];
+findById.$inject = ['$ngRedux', '$stateParams', 'PinActions', 'NotifyActions'];
 
 export const resetPin = ($ngRedux, PinActions) => {
   return $ngRedux.dispatch(PinActions.resetPin());

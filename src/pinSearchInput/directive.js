@@ -6,7 +6,7 @@ export default function pinSearchInput() {
     template: `
       <md-input-container>
         <label>Search</label>
-        <input type='text' ng-model='pinSearchInputCtrl.searchTerm' ng-change='pinSearchInputCtrl.find({search: pinSearchInputCtrl.searchTerm})'/>
+        <input type='text' ng-model='pinSearchInputCtrl.searchTerm' ng-change='pinSearchInputCtrl.search({search: pinSearchInputCtrl.searchTerm})'/>
       </md-input-container>
     `
   };
